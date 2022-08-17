@@ -38,7 +38,10 @@ export default class KanbanAPI {
         // update column and position
         if(newProps.columnId !== undefined && newProps.position !== undefined) {
             const targetColumn = data.find(column => column.id == newProps.columnId);
-            console.log(targetColumn)
+            console.log(targetColumn);
+            if(!targetColumn) {
+                throw new Error("Target column not found.");
+            }
         }
     }
 }
