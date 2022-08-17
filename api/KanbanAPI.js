@@ -37,12 +37,19 @@ export default class KanbanAPI {
 
         // update column and position
         if(newProps.columnId !== undefined && newProps.position !== undefined) {
-            const targetColumn = data.find(column => column.id == newProps.columnId);
+            const targetColumn = data.find(column => column.idRandom == newProps.columnId);
             console.log(targetColumn);
             if(!targetColumn) {
                 throw new Error("Target column not found.");
             }
+
+            // delate the item from it's current column
+            currentColumn.items.splice(currentColumn.items.indexOF(item), 1)
+
+            // move item into it's new column and pozition
+            targetColumn.items.splice(newProps.position, 0, item);
         }
+        save(data);
     }
 }
 
